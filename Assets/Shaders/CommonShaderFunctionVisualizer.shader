@@ -2,6 +2,8 @@
 {
     Properties
     {
+        _Power("Power", Range(1,20)) = 2
+        _RcpInput("RCP Input", Range(1,20)) = 10
     }
     SubShader
     {
@@ -30,6 +32,8 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            half _Power;
+            half _RcpInput;
 
             v2f vert (appdata v)
             {
@@ -42,7 +46,9 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed uvXCol = i.uv.x;
-                return uvXCol;
+                fixed powUVXCol = pow(i.uv.x, _Power);
+                fixed rcpUVXCol = rcp(i.uv.x * _RcpInput); 
+                return powUVXCol;
             }
             ENDCG
         }

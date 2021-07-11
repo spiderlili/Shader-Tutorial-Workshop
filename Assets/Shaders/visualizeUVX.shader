@@ -43,8 +43,6 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed uvXCol = i.uv.x;
-                fixed powUVXCol = pow(i.uv.x, 2);
-                fixed rcpUVXCol = rcp(i.uv.x * 10); 
                 return uvXCol;
             }
             ENDCG
