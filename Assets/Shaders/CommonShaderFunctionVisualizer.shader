@@ -2,8 +2,10 @@
 {
     Properties
     {
+        [KeywordEnum(Power, RCP)]_VisualizePowerOrRCP("Visualize Power or RCP", Float) = 0
         _Power("Power", Range(1,20)) = 2
         _RcpInput("RCP Input", Range(1,20)) = 10
+        _DistanceInput("Distance Input", Range(0,1))=0.5
     }
     SubShader
     {
@@ -34,6 +36,8 @@
             float4 _MainTex_ST;
             half _Power;
             half _RcpInput;
+            half _DistanceInput;
+            half _VisualizePowerOrRCP;
 
             v2f vert (appdata v)
             {
@@ -48,7 +52,15 @@
                 fixed uvXCol = i.uv.x;
                 fixed powUVXCol = pow(i.uv.x, _Power);
                 fixed rcpUVXCol = rcp(i.uv.x * _RcpInput); 
+                fixed distUVCol = distance(i.uv.x, _DistanceInput);
+                fixed lengthUVCol = length(i.uv.x - _DistanceInput); //same effect as distUVCol
+                fixed lengthUVCircle = distance(i.uv.xy, _DistanceInput);
+                fixed lengthUVCircleReverse = 1 - distance(i.uv.xy, _DistanceInput);
                 return powUVXCol;
+                //return distUVCol;
+                //return lengthUVCol;
+                //return lengthUVCircle;
+                //return lengthUVCircleReverse;
             }
             ENDCG
         }
