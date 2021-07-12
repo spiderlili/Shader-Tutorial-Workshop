@@ -53,7 +53,7 @@
                 fixed powUVXCol = pow(i.uv.x, _Power);
                 fixed rcpUVXCol = rcp(i.uv.x * _RcpInput); 
                 fixed distUVCol = distance(i.uv.x, _DistanceInput);
-                fixed lengthUVCol = length(i.uv.x - _DistanceInput); //same effect as distUVCol
+                fixed lengthUVCol = length(i.uv.x - _DistanceInput); //same effect as distUVCol, takes 1 vector input
                 fixed lengthUVCircle = distance(i.uv.xy, _DistanceInput);
                 fixed lengthUVCircleReverse = 1 - distance(i.uv.xy, _DistanceInput);
                 return powUVXCol;
