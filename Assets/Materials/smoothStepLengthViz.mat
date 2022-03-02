@@ -68,7 +68,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
-    - _SmoothstepMax: 0.52
+    - _SmoothstepMax: 0.3
     - _SmoothstepMin: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
