@@ -1,11 +1,10 @@
-﻿Shader "Unlit/Visualize Length-Smoothstep"
+﻿Shader "Unlit/Visualize Ceil Floor"
 {
     Properties
     {
-        _SmoothstepMin("Smoothstep Min", float) = 0.1
-        _SmoothstepMax("Smoothstep Max", float) = 1    
+        //todo: add dropdown menu for selecting different visualizations
+        _Banding("Banding", Range(1,10)) = 5
     }
-    
     SubShader
     {
         Tags { "RenderType"="Opaque" }
@@ -16,6 +15,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+
             #include "UnityCG.cginc"
 
             struct appdata
@@ -30,9 +30,10 @@
                 float4 vertex : SV_POSITION;
             };
 
-            float _SmoothstepMin;
-            float _SmoothstepMax;
-            
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            uint _Banding;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -43,9 +44,8 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 fade = length(i.uv.xy - 0.5);
-                fixed smoothStepCol = smoothstep(_SmoothstepMin, _SmoothstepMax, fade);
-                return smoothStepCol;
+                fixed uvXCol = ceil(i.uv.x*_Banding)/_Banding;
+                return uvXCol;
             }
             ENDCG
         }
