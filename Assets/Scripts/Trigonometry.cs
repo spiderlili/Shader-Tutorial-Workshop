@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Trigonometry : MonoBehaviour
 {
@@ -15,22 +12,25 @@ public class Trigonometry : MonoBehaviour
         float degrees = radians * Mathf.Rad2Deg; // 360
     }
 
-    private void OnDrawGizmos()
+    Vector2 AngleToDirection(float angleInRadians)
+    {
+        return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
+    }
+
+    private void DrawDots()
     {
         // Calculate an angle: divide full turn (TAU) into the angle to each dot
         // For each of the iterations: need the angle to each dot, skip the start & end point using dotCount -1
         for (int i = 0; i < dotCount; i++) {
             float angleInTurns = i / ((float)dotCount);
             float angRad = angleInTurns * TAU; // use this to get the direction vector
-            float x = Mathf.Cos(angRad);
-            float y = Mathf.Sin(angRad);
-            Vector2 point = new Vector2(x, y);
+            Vector2 point = AngleToDirection(angRad);
             Gizmos.DrawSphere(point, dotRadius);
         }
     }
 
-    private void Start()
+    private void OnDrawGizmos()
     {
-
+        DrawDots();
     }
 }
