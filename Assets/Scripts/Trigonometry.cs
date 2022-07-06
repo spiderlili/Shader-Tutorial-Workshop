@@ -17,12 +17,17 @@ public class Trigonometry : MonoBehaviour
         return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
     }
 
+    float DirectionToAngle(Vector2 v)
+    {
+        return Mathf.Atan2(v.y, v.x);
+    }
+
     private void DrawDots()
     {
         // Calculate an angle: divide full turn (TAU) into the angle to each dot
         // For each of the iterations: need the angle to each dot, skip the start & end point using dotCount -1
         for (int i = 0; i < dotCount; i++) {
-            float angleInTurns = i / ((float)dotCount);
+            float angleInTurns = i / ((float)dotCount); // do NOT draw a dot at 0 & 360 degrees, otherwise -1
             float angRad = angleInTurns * TAU; // use this to get the direction vector
             Vector2 point = AngleToDirection(angRad);
             Gizmos.DrawSphere(point, dotRadius);
