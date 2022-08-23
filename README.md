@@ -1,2 +1,2 @@
 # Shader-Tutorial-Workshop
-Unity Shader Tutorial Workshop designed for artists
+Unity Shader & Maths Tutorial Workshops
